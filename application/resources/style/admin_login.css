@@ -1,0 +1,38 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background: #999;
+}
+
+.center_marker {
+	margin: auto auto;
+	position: absolute;
+	top: 100px;
+	width: 100%;
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+}
+
+#select_center {
+	text-align: center;
+	margin: 0px auto;
+}
+
+.select_separate {
+	margin: 10px 10px 10px 2px;
+}
+
+#footer {
+	font-size: 12px;
+	width: 100%;
+	text-align: center;
+	margin: 0px auto;
+	position: absolute;
+	bottom: 10px;	
+}
