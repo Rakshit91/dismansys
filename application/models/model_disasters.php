@@ -1,6 +1,6 @@
 <?php
 
-class Model_staff extends CI_Model {
+class Model_disasters extends CI_Model {
 
 
 	public function get_all_staff() {

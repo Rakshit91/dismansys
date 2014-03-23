@@ -10,7 +10,7 @@
 <div class="center_marker">
 	<h1>Staff Login</h1>
 	<?php
-	echo form_open('main/login_validation');
+	echo form_open('staff/login_validation');
 	
 	echo validation_errors();
 	

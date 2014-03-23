@@ -26,8 +26,10 @@ class Staff extends CI_Controller {
 	}
 
 	public function members() {
+		$this->load->model('model_staff');
 		if($this->session->userdata('is_logged_in')) {
-			$this->load->view('members');
+			$data['results'] = $this->model_staff->get_all_disasters();
+			$this->load->view('staff', $data);
 		} else {
 			redirect('main/restricted');
 		}
@@ -39,6 +41,7 @@ class Staff extends CI_Controller {
 	}
 
 	public function login_validation(){
+		$this->load->model('model_staff');
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|xss_clean|callback_validate_cradentials');
@@ -47,11 +50,12 @@ class Staff extends CI_Controller {
 		if($this->form_validation->run()){
 
 			$data = array(
+				'name' => $this->model_staff->get_name($this->input->post('email')),
 				'email' => $this->input->post('email'),
 				'is_logged_in' => 1
 			);
 			$this->session->set_userdata($data);
-			redirect('main/members');
+			redirect('staff/members');
 		} else {
 			$this->load->view('login');
 		}
@@ -100,7 +104,7 @@ class Staff extends CI_Controller {
 
 	public function validate_cradentials(){
 		$this->load->model('model_users');
-		if($this->model_users->can_log_in()){
+		if($this->model_users->can_log_in('staffuser')){
 			return true;
 		} else {
 			$this->form_validation->set_message('validate_cradentials', 'Invalid username/password.');
@@ -110,7 +114,7 @@ class Staff extends CI_Controller {
 
 	public function logout() {
 		$this->session->sess_destroy();
-		redirect('main/login');
+		redirect('staff');
 	}
 
 	public function register_user($key) {

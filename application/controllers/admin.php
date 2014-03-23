@@ -36,6 +36,11 @@ class Admin extends CI_Controller {
 			//redirect('admin');
 		}
 	}
+	
+	public function logout() {
+		$this->session->sess_destroy();
+		redirect('admin');
+	}
 
 	public function validate_cradentials(){
 		$this->load->model('model_users');
@@ -45,6 +50,18 @@ class Admin extends CI_Controller {
 			$this->form_validation->set_message('validate_cradentials', 'Invalid username/password.');
 			return false;
 		}
+	}
+
+	public function disasters() {
+		$this->load->model("model_disasters");
+		$data['results'] = $this->model_disasters->get_all_disasters();
+		$this->load->view('admin_disasters', $data);
+	}
+
+	public function staff() {
+		$this->load->model("model_staff");
+		$data['results'] = $this->model_staff->get_all_staff();
+		$this->load->view('admin_staff', $data);
 	}
 
 	public function signup_validation(){
@@ -85,11 +102,6 @@ class Admin extends CI_Controller {
 		}
 		
 		
-	}
-
-	public function logout() {
-		$this->session->sess_destroy();
-		redirect('admin');
 	}
 
 	public function register_user($key) {

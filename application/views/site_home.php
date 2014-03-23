@@ -6,25 +6,27 @@
 	</head>
 	<body>
 		<div class="center_marker">
+			<br/>
 			<h1>Missing people report</h1>
+			<br/>
 			<div id="select_center">
 				Select State: <select class="select_separate" onchange="">
 					<option value="1">All</option>
-					<option value="1">Gujarat</option>
-					<option value="2">Rajesthan</option>
-					<option value="3">Madhya Pradesh</option>
-					<option value="4">Kerela</option>
-					<option value="5">Tamil Nadu</option>
-					<option value="6">Assam</option>
+					<option value="2">Gujarat</option>
+					<option value="3">Rajesthan</option>
+					<option value="4">Madhya Pradesh</option>
+					<option value="5">Kerela</option>
+					<option value="6">Tamil Nadu</option>
+					<option value="7">Assam</option>
 				</select>
 				Select Disaster Type: <select class="select_separate" onchange="">
 					<option value="1">All</option>
-					<option value="1">Earthquack</option>
-					<option value="2">Fire</option>
-					<option value="3">Volcanic Euption</option>
-					<option value="4">Floods</option>
-					<option value="5">Cyclone</option>
-					<option value="6">Tsunami</option>
+					<option value="2">Earthquack</option>
+					<option value="3">Fire</option>
+					<option value="4">Volcanic Euption</option>
+					<option value="5">Floods</option>
+					<option value="6">Cyclone</option>
+					<option value="7">Tsunami</option>
 				</select>
 			</div>
 			<div id="content">
