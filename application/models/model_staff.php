@@ -13,6 +13,16 @@ class Model_staff extends CI_Model {
 		return $query;
 	}
 
+	public function get_all_resource_category() {
+		$query = $this->db->query('SELECT * from resource_category');
+		return $query;
+	}
+	
+	public function get_all_resource($res_cat_id) {
+		$query = $this->db->query('SELECT * from resource_category ');
+		return $query;
+	}
+
 	public function get_name($email) {
 
 		$sql = "SELECT name FROM staffUser WHERE email = ?";

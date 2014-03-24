@@ -5,18 +5,10 @@ class Staff extends CI_Controller {
 		$this->staff_login();
 	}
 
-	public function site_home() {
-		$this->load->view('site_home');
-	}
-	
 	public function staff_login() {
 		$this->load->view('staff_login');
 	}
 	
-	public function admin_login() {
-		$this->load->view('admin_login');
-	}
-
 	public function login() {
 		$this->load->view('login');
 	}
@@ -35,7 +27,20 @@ class Staff extends CI_Controller {
 		}
 	}
 
+	public function select_disaster() {
+		$this->load->model('model_staff');
+		$this->session->set_userdata('disaster_id', $this->input->post('disaster_id'));
+		$data['results'] = $this->model_staff->get_all_resource_category();
+		$this->load->view('staff_disaster', $data);
+	}
 	
+	public function select_resource_category() {
+		$this->load->model('model_staff');
+		$this->session->set_userdata('resource_category_id', $this->input->post('resource_category_id'));
+		$data['results'] = $this->model_staff->get_all_resources($this->input->post('resource_category_id'));
+		$this->load->view('staff_disaster', $data);
+	}
+
 	public function restricted(){
 		$this->load->view('restricted');
 	}
