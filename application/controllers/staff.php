@@ -109,7 +109,7 @@ class Staff extends CI_Controller {
 
 	public function validate_cradentials(){
 		$this->load->model('model_users');
-		if($this->model_users->can_log_in('staffuser')){
+		if($this->model_users->can_log_in('user_staff')){
 			return true;
 		} else {
 			$this->form_validation->set_message('validate_cradentials', 'Invalid username/password.');

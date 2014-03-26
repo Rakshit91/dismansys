@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['hostname'] = 'mysql.hostinger.in';
+$db['default']['username'] = 'u320330370_root';
+$db['default']['password'] = '1a2b3c';
 $db['default']['database'] = 'u320330370_db';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

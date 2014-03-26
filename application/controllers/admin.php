@@ -33,7 +33,7 @@ class Admin extends CI_Controller {
 	
 	public function validate_cradentials(){
 		$this->load->model('model_users');
-		if($this->model_users->can_log_in('adminUser')){
+		if($this->model_users->can_log_in('user_admin')){
 			return true;
 		} else {
 			$this->form_validation->set_message('validate_cradentials', 'Invalid username/password.');
@@ -51,7 +51,7 @@ class Admin extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[staffuser.email]');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user_staff.email]');
 
 		$this->form_validation->set_message('is_unique', "This email address already exists.");
 

@@ -4,7 +4,7 @@ class Model_staff extends CI_Model {
 
 
 	public function get_all_staff() {
-		$query = $this->db->query('SELECT id, name, email from staffUser');
+		$query = $this->db->query('SELECT id, name, email from user_staff');
 		return $query;
 	}
 
@@ -25,7 +25,7 @@ class Model_staff extends CI_Model {
 
 	public function get_name($email) {
 
-		$sql = "SELECT name FROM staffUser WHERE email = ?";
+		$sql = "SELECT name FROM user_staff WHERE email = ?";
 		$name = 'abcd';
 		$query = $this->db->query($sql, array($email)); 
 		if ($query->num_rows() > 0)
@@ -75,7 +75,7 @@ class Model_staff extends CI_Model {
 			'password' => md5($pass)
 		);
 		
-		$query = $this->db->insert('staffUser', $data);
+		$query = $this->db->insert('user_staff', $data);
 		if($query) {
 			return true;
 		} else {
