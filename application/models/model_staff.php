@@ -67,6 +67,22 @@ class Model_staff extends CI_Model {
 		}
 		
 	}
+
+	public function add_staff($pass) {
+		$data = array (
+			'name' => $this->input->post('name'),
+			'email' => $this->input->post('email'),
+			'password' => md5($pass)
+		);
+		
+		$query = $this->db->insert('staffUser', $data);
+		if($query) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 	
 	public function is_valid_key($key) {
 		$this->db->where('key', $key);

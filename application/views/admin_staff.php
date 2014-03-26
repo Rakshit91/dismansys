@@ -31,7 +31,7 @@
 		}
 
 		echo "<tr>";
-		echo form_open('admin/add_disaster');
+		echo form_open('admin/add_staff_validation');
 		
 		//echo "<td>";
 		//echo form_submit('login_submit', 'Submit');
@@ -54,6 +54,7 @@
 		echo form_close();
 		echo "</tr>";
 		echo "</table>";
+		echo $this->session->flashdata('msg');
 	?>
 	<a href = '<?php echo base_url(). "admin/logout" ?>'>Logout</a>
 </div>

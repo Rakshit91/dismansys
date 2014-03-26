@@ -46,6 +46,44 @@ class Admin extends CI_Controller {
 		redirect('admin');
 	}
 
+	public function add_staff_validation() {
+		$this->load->model('model_staff');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('name', 'Name', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[staffuser.email]');
+
+		$this->form_validation->set_message('is_unique', "This email address already exists.");
+
+		$msg='';
+
+		if($this->form_validation->run()) {
+			$this->load->library('email', array('mailtype' => 'html'));
+
+			$this->email->from('admin@dismansys.url.ph', "Admin");
+			$this->email->to($this->input->post('email'));
+			$this->email->subject("Confirm you account");
+
+			$pass = uniqid();
+
+			$message = "<p>You have been add as a staff at Disaster Management System. Your login cradentials are: <br/>";
+			$message .= "Email: ".$this->input->post('email');
+			$message .= "Password: ".$pass."</p>";
+			
+			$this->email->message($message);
+
+			if($this->model_staff->add_staff($pass)) {
+				if($this->email->send()) {
+					$msg = "The mail has been sent";
+				} else $msg = "Failed to send the mail";				
+			} else $msg = "Problem adding to database";
+		} else {
+			$msg = 'invalid data';
+		}
+		$this->session->set_flashdata('msg', $msg);
+		redirect('admin/staff');
+	}
+
 	public function add_disaster() {
 		$this->load->model('model_disasters');
 		$this->load->library('form_validation');
@@ -64,7 +102,6 @@ class Admin extends CI_Controller {
 		}
 
 		redirect('admin/disasters');
-
 	}
 
 	public function date_validation() {
