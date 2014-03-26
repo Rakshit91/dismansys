@@ -11,25 +11,6 @@
 
 	<a href="<?php echo base_url()."admin/disasters"?>">Disasters</a>
 	<a href="<?php echo base_url()."admin/staff"?>">Staff</a>
-	<?php 
-		/*
-		echo "<pre>";
-		foreach ($results->result() as $row)
-		{
-			echo $row->id;
-			echo "    ";
-			echo $row->state;
-			echo "    ";
-			echo $row->type;
-			echo "    ";
-			echo $row->date;
-			echo "    ";
-			echo $row->cities;
-			echo "<br/>";
-		}
-		echo "</pre>";
-		*/
-	?>
 	<a href = '<?php echo base_url(). "admin/logout" ?>'>Logout</a>
 </div>
 

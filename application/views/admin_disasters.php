@@ -20,7 +20,7 @@
 		echo "<td>"."state"."</td>";
 		echo "<td>"."type"."</td>";
 		echo "<td>"."date"."</td>";
-		echo "<td>"."cities"."</td>";
+		echo "<td>"."city"."</td>";
 		echo "</tr>";
 		foreach ($results->result() as $row)
 		{
@@ -29,7 +29,7 @@
 			echo "<td>".$row->state."</td>";
 			echo "<td>".$row->type."</td>";
 			echo "<td>".$row->date."</td>";
-			echo "<td>".$row->cities."</td>";
+			echo "<td>".$row->city."</td>";
 			//echo "<td>"."edit"."</td>";
 			echo "</tr>";
 		}
@@ -69,6 +69,7 @@
 		echo form_close();
 		echo "</tr>";
 		echo "</table>";
+		echo $this->session->flashdata('msg');
 	?>
 	<a href = '<?php echo base_url(). "admin/logout" ?>'>Logout</a>
 </div>

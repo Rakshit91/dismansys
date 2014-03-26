@@ -92,4 +92,24 @@ class Model_disasters extends CI_Model {
 			return false;
 		}
 	}
+
+	public function add_disaster() {
+		$data = array (
+			'state' => $this->input->post('state'),
+			'type' => $this->input->post('type'),
+			'date' => $this->input->post('date'),
+			'city' => $this->input->post('city'),
+		);
+
+		$this->db->where($data);
+		$query = $this->db->get('disasters');
+
+		if($query->num_rows() != 0) {
+			return false;
+		}
+
+		$this->db->insert('disasters', $data);
+		return true;
+
+	}
 }

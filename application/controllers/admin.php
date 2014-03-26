@@ -3,19 +3,15 @@
 class Admin extends CI_Controller {
 	public function index(){
 
-		$this->load->model("model_staff");
-		$data['results'] = $this->model_staff->get_all_staff();
-		if($this->session->userdata('is_logged_in') && ($this->session->userdata('user_type') == "admin")) {
-			$this->load->view('admin', $data);
-		} else {
-			redirect('admin/login');
-		}
+//		$this->load->model("model_staff");
+//		$data['results'] = $this->model_staff->get_all_staff();
+//		if($this->session->userdata('is_logged_in') && ($this->session->userdata('user_type') == "admin")) {
+//			$this->load->view('admin', $data);
+//		} else {
+		$this->load->view('admin_login');
+//		}
 	}
 	
-	public function login() {
-		$this->load->view('admin_login');
-	}
-
 	public function login_validation(){
 		$this->load->library('form_validation');
 		
@@ -26,22 +22,15 @@ class Admin extends CI_Controller {
 
 			$data = array(
 				'email' => $this->input->post('email'),
-				'is_logged_in' => 1,
-				'user_type' => "admin"
+				'is_logged_in' => 1
 			);
 			$this->session->set_userdata($data);
-			redirect('admin');
+			$this->load->view('admin');
 		} else {
 			$this->load->view('admin_login');
-			//redirect('admin');
 		}
 	}
 	
-	public function logout() {
-		$this->session->sess_destroy();
-		redirect('admin');
-	}
-
 	public function validate_cradentials(){
 		$this->load->model('model_users');
 		if($this->model_users->can_log_in('adminUser')){
@@ -50,6 +39,54 @@ class Admin extends CI_Controller {
 			$this->form_validation->set_message('validate_cradentials', 'Invalid username/password.');
 			return false;
 		}
+	}
+
+	public function logout() {
+		$this->session->sess_destroy();
+		redirect('admin');
+	}
+
+	public function add_disaster() {
+		$this->load->model('model_disasters');
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('state', 'State', 'required');
+		$this->form_validation->set_rules('type', 'Type', 'required');
+		$this->form_validation->set_rules('date', 'Date', 'required|callback_date_validation');
+		$this->form_validation->set_rules('city', 'City', 'required');
+		
+		if($this->form_validation->run()) {
+			if($this->model_disasters->add_disaster()) {
+				$this->session->set_flashdata('msg', 'disaster successfully added');
+			} else {
+				$this->session->set_flashdata('msg', 'disaster already exists');
+			}
+		}
+
+		redirect('admin/disasters');
+
+	}
+
+	public function date_validation() {
+		$date = $this->input->post('date');
+		$year = (int) substr($date, 0, 4);
+		$month = (int) substr($date, 5, 2);
+		$day = (int) substr($date, 8, 2);
+	    if (checkdate($month, $day, $year)) {
+	    	$date = date('Y/m/d');
+		    $yearNow = (int) substr($date, 0, 4);
+			$monthNow = (int) substr($date, 5, 2);
+			$dayNow = (int) substr($date, 8, 2);
+			if(($year<=$yearNow)&&($month<=$monthNow)&&($day<=$dayNow)) {
+				return true;
+			} else {
+				$this->form_validation->set_message('date_validation', 'date should be on or before today');
+			}
+	    } else {
+	    	$this->form_validation->set_message('date_validation', 'date formate incorrect');
+	    }
+	    //$this->form_validation->set_message('date_validation', 'Invalid DATE.');
+	    return false;
 	}
 
 	public function disasters() {
